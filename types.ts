@@ -15,4 +15,8 @@ export interface EventDetails {
     time: string;
     mapLink: string;
   };
+  contact: {
+    phone: string;
+    whatsappMessage: string;
+  };
 }

@@ -1,11 +1,17 @@
 
 import React from 'react';
-import { MapPin, Calendar, Music, Heart, Star, Trophy } from 'lucide-react';
+import { MapPin, Calendar, Heart, Star, Trophy, MessageCircle } from 'lucide-react';
 import FlipCard from './components/FlipCard';
 import Countdown from './components/Countdown';
 import { EVENT_DETAILS } from './constants';
 
 const App: React.FC = () => {
+  const handleConfirmAttendance = () => {
+    const encodedMessage = encodeURIComponent(EVENT_DETAILS.contact.whatsappMessage);
+    const whatsappUrl = `https://wa.me/${EVENT_DETAILS.contact.phone}?text=${encodedMessage}`;
+    window.open(whatsappUrl, '_blank');
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#e6f2ff] to-[#cfe0ff] flex flex-col items-center px-4 py-8 md:py-12">
       
@@ -14,7 +20,7 @@ const App: React.FC = () => {
         <div className="inline-flex items-center justify-center p-2 bg-white rounded-full shadow-lg mb-4 animate-bounce">
           <span className="text-4xl">⚽</span>
         </div>
-        <h1 className="text-3xl md:text-5xl font-black text-[#0a2a66] leading-tight">
+        <h1 className="text-3xl md:text-5xl font-black text-[#0a2a66] leading-tight text-balance">
           Primera Comunión de <br/>
           <span className="text-green-600 drop-shadow-sm uppercase">{EVENT_DETAILS.name}</span>
         </h1>
@@ -30,7 +36,7 @@ const App: React.FC = () => {
       </div>
 
       {/* Interactive Cards Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-4xl px-2">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-4xl px-2 mb-16">
         
         {/* Main Card */}
         <FlipCard 
@@ -112,24 +118,41 @@ const App: React.FC = () => {
             </div>
           }
         />
+      </div>
 
+      {/* Confirmation Button */}
+      <div className="w-full max-w-md px-4 mb-20 text-center">
+        <p className="text-[#1f3f7a] font-bold mb-4 uppercase tracking-tighter">¿Nos acompañas?</p>
+        <button 
+          onClick={handleConfirmAttendance}
+          className="group relative w-full flex items-center justify-center space-x-3 bg-green-500 hover:bg-green-600 text-white py-5 px-8 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 active:scale-95"
+        >
+          <div className="absolute -top-3 -right-3 bg-yellow-400 text-blue-900 p-2 rounded-full shadow-md animate-pulse">
+            <Trophy size={16} />
+          </div>
+          <MessageCircle size={28} className="group-hover:rotate-12 transition-transform" />
+          <span className="text-xl font-black uppercase tracking-tight">Confirmar Asistencia</span>
+        </button>
+        <p className="text-xs text-blue-700 mt-4 opacity-75 font-medium italic">
+          Se enviará un mensaje de WhatsApp para confirmar.
+        </p>
       </div>
 
       {/* Footer Section */}
-      <footer className="mt-20 pb-12 text-center animate-pulse">
-        <div className="flex justify-center items-center space-x-2 text-[#1d3f7a] mb-2">
+      <footer className="pb-12 text-center">
+        <div className="flex justify-center items-center space-x-2 text-[#1d3f7a] mb-2 opacity-80">
           <span className="text-2xl">⚽</span>
-          <p className="text-lg">Con muchísimo cariño,</p>
+          <p className="text-lg font-medium">Con muchísimo cariño,</p>
           <span className="text-2xl">⚽</span>
         </div>
-        <strong className="text-2xl font-black text-blue-900 uppercase tracking-widest">{EVENT_DETAILS.name}</strong>
+        <strong className="text-2xl font-black text-blue-900 uppercase tracking-widest block">{EVENT_DETAILS.name}</strong>
       </footer>
 
       {/* Decorative floating elements */}
-      <div className="fixed top-20 left-10 opacity-20 hidden lg:block animate-spin-slow">
+      <div className="fixed top-20 left-10 opacity-20 hidden lg:block animate-spin-slow pointer-events-none">
         <Star className="w-12 h-12 text-blue-400" />
       </div>
-      <div className="fixed bottom-20 right-10 opacity-20 hidden lg:block animate-bounce">
+      <div className="fixed bottom-20 right-10 opacity-20 hidden lg:block animate-bounce pointer-events-none">
         <Trophy className="w-16 h-16 text-yellow-600" />
       </div>
 
