@@ -18,7 +18,7 @@ export const EVENT_DETAILS: EventDetails = {
     mapLink: "https://www.google.com/maps/search/?api=1&query=Catering+Ntra+Sra+del+Valle+La+Palma+del+Condado"
   },
   contact: {
-    phone: "34600000000", // Reemplazar con el número real
+    phone: "34658176785", // Reemplazar con el número real
     whatsappMessage: "¡Hola! 👋 Queremos confirmar nuestra asistencia a la Primera Comunión de Manuel. ¡Nos vemos allí! ⚽✨"
   }
 };
